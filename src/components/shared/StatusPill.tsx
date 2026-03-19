@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type StatusVariant = "active" | "inactive" | "confirmed" | "pending" | "cancelled" | "paid" | "overdue" | "open" | "in_progress" | "closed" | "operational" | "degraded" | "down" | "revoked" | "high" | "medium" | "low";
+export type StatusVariant = "active" | "inactive" | "confirmed" | "pending" | "cancelled" | "completed" | "expired" | "paid" | "overdue" | "open" | "in_progress" | "closed" | "operational" | "degraded" | "down" | "revoked" | "high" | "medium" | "low";
 
 const variantStyles: Record<StatusVariant, string> = {
   active: "bg-success/10 text-success",
