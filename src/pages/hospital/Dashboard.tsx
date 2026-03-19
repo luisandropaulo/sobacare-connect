@@ -4,13 +4,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusPill } from "@/components/shared/StatusPill";
 import { hospitalKpis, hospitalAppointments, hospitalAppointmentsByDay } from "@/data/hospitalMockData";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { useAuth } from "@/contexts/AuthContext";
 
 const HospitalDashboard = () => {
+  const { user } = useAuth();
   const pending = hospitalAppointments.filter(a => a.status === "pending");
 
   return (
     <div className="space-y-6">
-      <div><h1 className="text-2xl font-bold">Dashboard Hospitalar</h1><p className="text-muted-foreground">Visão geral da sua instituição.</p></div>
+      <div>
+        <h1 className="text-2xl font-bold">Bem-vindo, {user?.name || "Admin"} 👋</h1>
+        <p className="text-muted-foreground">Visão geral da sua instituição.</p>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="Médicos" value={hospitalKpis.totalDoctors} icon={Stethoscope} />
         <StatsCard title="Pacientes" value={hospitalKpis.totalPatients} icon={Users} />

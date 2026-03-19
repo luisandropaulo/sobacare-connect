@@ -1,20 +1,22 @@
 import { StatsCard } from "@/components/shared/StatsCard";
-import { Calendar, ClipboardList, FileText, Heart, Stethoscope } from "lucide-react";
+import { Calendar, ClipboardList, FileText, Stethoscope } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusPill } from "@/components/shared/StatusPill";
 import { patientAppointments, patientConsultations } from "@/data/patientMockData";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const PatientDashboard = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const upcoming = patientAppointments.filter(a => a.status === "confirmed" || a.status === "pending").slice(0, 3);
   const recentConsultations = patientConsultations.slice(0, 2);
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Bem-vindo de volta</h1>
+        <h1 className="text-2xl font-bold">Bem-vindo, {user?.name || "Paciente"} 👋</h1>
         <p className="text-muted-foreground">Aqui está um resumo da sua saúde.</p>
       </div>
 
@@ -22,7 +24,7 @@ const PatientDashboard = () => {
         <StatsCard title="Próximas Consultas" value={upcoming.length} icon={Calendar} />
         <StatsCard title="Consultas Realizadas" value={patientConsultations.length} icon={Stethoscope} />
         <StatsCard title="Prescrições Ativas" value={2} icon={ClipboardList} />
-        <StatsCard title="Documentos" value={4} icon={FileText} />
+        <StatsCard title="Relatórios" value={3} icon={FileText} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { hospitalPatients, hospitalAppointments, hospitalPrescriptions } from "@/data/hospitalMockData";
 import { ProfileHeader } from "@/components/shared/ProfileHeader";
 import { InfoCard } from "@/components/shared/InfoCard";
@@ -13,6 +13,7 @@ import { toast } from "sonner";
 
 const HospitalPatientDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const patient = hospitalPatients.find((p) => p.id === id);
 
   if (!patient) return <EmptyState title="Paciente não encontrado" />;
@@ -32,8 +33,12 @@ const HospitalPatientDetail = () => {
         ]}
         actions={
           <>
-            <Button variant="outline" onClick={() => toast.info("Editar")}><Edit className="h-4 w-4 mr-2" />Editar</Button>
-            <Button onClick={() => toast.info("Agendar")}><CalendarPlus className="h-4 w-4 mr-2" />Agendar</Button>
+            <Button variant="outline" onClick={() => toast.info("Página de edição em desenvolvimento")}>
+              <Edit className="h-4 w-4 mr-2" />Editar
+            </Button>
+            <Button onClick={() => toast.info("Agendar consulta")}>
+              <CalendarPlus className="h-4 w-4 mr-2" />Agendar
+            </Button>
           </>
         }
       />

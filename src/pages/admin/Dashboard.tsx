@@ -3,14 +3,17 @@ import { StatsCard } from "@/components/shared/StatsCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { kpis, appointmentsByMonth, revenueByMonth, departmentDistribution } from "@/data/mockData";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
+import { useAuth } from "@/contexts/AuthContext";
 
 const COLORS = ["hsl(213,94%,45%)", "hsl(142,71%,45%)", "hsl(38,92%,50%)", "hsl(0,84%,60%)", "hsl(262,80%,50%)", "hsl(180,70%,45%)"];
 
 const AdminDashboard = () => {
+  const { user } = useAuth();
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Bem-vindo, {user?.name || "Admin"} 👋</h1>
         <p className="text-muted-foreground">Visão geral da plataforma SobaCare</p>
       </div>
 
@@ -30,9 +33,7 @@ const AdminDashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Consultas por Mês</CardTitle>
-          </CardHeader>
+          <CardHeader><CardTitle className="text-base">Consultas por Mês</CardTitle></CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={appointmentsByMonth}>
@@ -47,9 +48,7 @@ const AdminDashboard = () => {
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Receita Mensal (Kz)</CardTitle>
-          </CardHeader>
+          <CardHeader><CardTitle className="text-base">Receita Mensal (Kz)</CardTitle></CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={280}>
               <LineChart data={revenueByMonth}>
@@ -65,9 +64,7 @@ const AdminDashboard = () => {
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Distribuição por Departamento</CardTitle>
-        </CardHeader>
+        <CardHeader><CardTitle className="text-base">Distribuição por Departamento</CardTitle></CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={280}>
             <PieChart>
