@@ -110,7 +110,9 @@ const App = () => (
             <Route path="/dashboard/admin-hospital" element={<HospitalLayout />}>
               <Route index element={<HospitalDashboard />} />
               <Route path="doctors" element={<HospitalDoctors />} />
+              <Route path="doctors/:id" element={<HospitalDoctorDetail />} />
               <Route path="patients" element={<HospitalPatients />} />
+              <Route path="patients/:id" element={<HospitalPatientDetail />} />
               <Route path="appointments" element={<HospitalAppointments />} />
               <Route path="calendar" element={<HospitalCalendar />} />
               <Route path="prescriptions" element={<HospitalPrescriptions />} />
