@@ -1,9 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/contexts/AuthContext";
+import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
@@ -32,16 +33,19 @@ import ServicesPage from "./pages/admin/Services";
 import SupportPage from "./pages/admin/Support";
 import NotificationsPage from "./pages/admin/Notifications";
 import SettingsPage from "./pages/admin/Settings";
+import AdminProfile from "./pages/admin/Profile";
 
 import PatientLayout from "./layouts/PatientLayout";
 import PatientDashboard from "./pages/patient/Dashboard";
 import PatientAppointments from "./pages/patient/Appointments";
+import CreateAppointment from "./pages/patient/CreateAppointment";
 import PatientConsultations from "./pages/patient/Consultations";
 import PatientPrescriptions from "./pages/patient/Prescriptions";
 import PatientDocuments from "./pages/patient/Documents";
 import PatientFamily from "./pages/patient/Family";
 import PatientReports from "./pages/patient/Reports";
 import PatientSettings from "./pages/patient/Settings";
+import PatientProfile from "./pages/patient/Profile";
 
 import HospitalLayout from "./layouts/HospitalLayout";
 import HospitalDashboard from "./pages/hospital/Dashboard";
@@ -54,7 +58,10 @@ import HospitalCalendar from "./pages/hospital/Calendar";
 import HospitalPrescriptions from "./pages/hospital/Prescriptions";
 import HospitalActivity from "./pages/hospital/Activity";
 import HospitalUnits from "./pages/hospital/Units";
+import CreateUnit from "./pages/hospital/CreateUnit";
 import HospitalPlans from "./pages/hospital/Plans";
+import HospitalDepartments from "./pages/hospital/Departments";
+import HospitalProfile from "./pages/hospital/Profile";
 
 const queryClient = new QueryClient();
 
@@ -66,7 +73,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
@@ -94,17 +101,20 @@ const App = () => (
               <Route path="support" element={<SupportPage />} />
               <Route path="notifications" element={<NotificationsPage />} />
               <Route path="settings" element={<SettingsPage />} />
+              <Route path="profile" element={<AdminProfile />} />
             </Route>
 
             <Route path="/dashboard/patient" element={<PatientLayout />}>
               <Route index element={<PatientDashboard />} />
               <Route path="appointments" element={<PatientAppointments />} />
+              <Route path="appointments/create" element={<CreateAppointment />} />
               <Route path="consultations" element={<PatientConsultations />} />
               <Route path="prescriptions" element={<PatientPrescriptions />} />
               <Route path="documents" element={<PatientDocuments />} />
               <Route path="family" element={<PatientFamily />} />
               <Route path="reports" element={<PatientReports />} />
               <Route path="settings" element={<PatientSettings />} />
+              <Route path="profile" element={<PatientProfile />} />
             </Route>
 
             <Route path="/dashboard/admin-hospital" element={<HospitalLayout />}>
@@ -115,10 +125,13 @@ const App = () => (
               <Route path="patients/:id" element={<HospitalPatientDetail />} />
               <Route path="appointments" element={<HospitalAppointments />} />
               <Route path="calendar" element={<HospitalCalendar />} />
+              <Route path="departments" element={<HospitalDepartments />} />
               <Route path="prescriptions" element={<HospitalPrescriptions />} />
               <Route path="activity" element={<HospitalActivity />} />
               <Route path="units" element={<HospitalUnits />} />
+              <Route path="units/create" element={<CreateUnit />} />
               <Route path="plans" element={<HospitalPlans />} />
+              <Route path="profile" element={<HospitalProfile />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

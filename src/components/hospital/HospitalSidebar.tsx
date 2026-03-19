@@ -1,6 +1,5 @@
-import { Building2, Calendar, ClipboardList, Heart, Home, Settings, Stethoscope, Users, Activity, LayoutGrid, CreditCard } from "lucide-react";
+import { Building2, Calendar, ClipboardList, Heart, Home, Layers, Stethoscope, Users, Activity, CreditCard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, useSidebar,
@@ -12,6 +11,7 @@ const management = [
   { title: "Pacientes", url: "/dashboard/admin-hospital/patients", icon: Users },
   { title: "Consultas", url: "/dashboard/admin-hospital/appointments", icon: ClipboardList },
   { title: "Calendário", url: "/dashboard/admin-hospital/calendar", icon: Calendar },
+  { title: "Departamentos", url: "/dashboard/admin-hospital/departments", icon: Layers },
   { title: "Prescrições", url: "/dashboard/admin-hospital/prescriptions", icon: ClipboardList },
 ];
 
