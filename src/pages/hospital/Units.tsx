@@ -17,7 +17,7 @@ const columns: Column<HospitalUnit>[] = [
 
 const HospitalUnits = () => {
   const navigate = useNavigate();
-  const plan = "Professional"; // simulated
+  const plan: string = "Professional"; // simulated
   const maxUnits = plan === "Essential" ? 1 : plan === "Professional" ? 5 : 999;
   const canCreate = hospitalUnits.length < maxUnits;
 
