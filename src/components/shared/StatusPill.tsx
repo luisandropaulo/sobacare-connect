@@ -30,6 +30,8 @@ const labels: Record<StatusVariant, string> = {
   confirmed: "Confirmado",
   pending: "Pendente",
   cancelled: "Cancelado",
+  completed: "Concluído",
+  expired: "Expirado",
   paid: "Pago",
   overdue: "Atrasado",
   open: "Aberto",
