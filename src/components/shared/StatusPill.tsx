@@ -8,6 +8,8 @@ const variantStyles: Record<StatusVariant, string> = {
   confirmed: "bg-success/10 text-success",
   pending: "bg-warning/10 text-warning",
   cancelled: "bg-destructive/10 text-destructive",
+  completed: "bg-primary/10 text-primary",
+  expired: "bg-muted text-muted-foreground",
   paid: "bg-success/10 text-success",
   overdue: "bg-destructive/10 text-destructive",
   open: "bg-primary/10 text-primary",
