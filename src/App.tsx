@@ -12,6 +12,9 @@ import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import UsersPage from "./pages/admin/Users";
 import HospitalsPage from "./pages/admin/Hospitals";
+import AdminDoctorDetail from "./pages/admin/DoctorDetail";
+import AdminPatientDetail from "./pages/admin/PatientDetail";
+import AdminHospitalDetail from "./pages/admin/HospitalDetail";
 import AdminDoctorsPage from "./pages/admin/Doctors";
 import AdminPatientsPage from "./pages/admin/Patients";
 import AdminAppointmentsPage from "./pages/admin/Appointments";
@@ -43,6 +46,8 @@ import PatientSettings from "./pages/patient/Settings";
 import HospitalLayout from "./layouts/HospitalLayout";
 import HospitalDashboard from "./pages/hospital/Dashboard";
 import HospitalDoctors from "./pages/hospital/Doctors";
+import HospitalDoctorDetail from "./pages/hospital/DoctorDetail";
+import HospitalPatientDetail from "./pages/hospital/PatientDetail";
 import HospitalPatients from "./pages/hospital/Patients";
 import HospitalAppointments from "./pages/hospital/Appointments";
 import HospitalCalendar from "./pages/hospital/Calendar";
@@ -70,7 +75,10 @@ const App = () => (
               <Route path="users" element={<UsersPage />} />
               <Route path="hospitals" element={<HospitalsPage />} />
               <Route path="doctors" element={<AdminDoctorsPage />} />
+              <Route path="doctors/:id" element={<AdminDoctorDetail />} />
               <Route path="patients" element={<AdminPatientsPage />} />
+              <Route path="patients/:id" element={<AdminPatientDetail />} />
+              <Route path="hospitals/:id" element={<AdminHospitalDetail />} />
               <Route path="appointments" element={<AdminAppointmentsPage />} />
               <Route path="departments" element={<DepartmentsPage />} />
               <Route path="billing" element={<BillingPage />} />
@@ -102,7 +110,9 @@ const App = () => (
             <Route path="/dashboard/admin-hospital" element={<HospitalLayout />}>
               <Route index element={<HospitalDashboard />} />
               <Route path="doctors" element={<HospitalDoctors />} />
+              <Route path="doctors/:id" element={<HospitalDoctorDetail />} />
               <Route path="patients" element={<HospitalPatients />} />
+              <Route path="patients/:id" element={<HospitalPatientDetail />} />
               <Route path="appointments" element={<HospitalAppointments />} />
               <Route path="calendar" element={<HospitalCalendar />} />
               <Route path="prescriptions" element={<HospitalPrescriptions />} />
