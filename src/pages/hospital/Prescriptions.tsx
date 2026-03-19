@@ -11,11 +11,11 @@ import { Plus } from "lucide-react";
 import { toast } from "sonner";
 
 const columns = [
-  { key: "patient" as const, label: "Paciente" },
-  { key: "doctor" as const, label: "Médico" },
-  { key: "diagnosis" as const, label: "Diagnóstico" },
-  { key: "date" as const, label: "Data" },
-  { key: "status" as const, label: "Estado", render: (v: string) => <StatusPill status={v as any} /> },
+  { key: "patient", header: "Paciente" },
+  { key: "doctor", header: "Médico" },
+  { key: "diagnosis", header: "Diagnóstico" },
+  { key: "date", header: "Data" },
+  { key: "status", header: "Estado", render: (row: any) => <StatusPill status={row.status} /> },
 ];
 
 const HospitalPrescriptions = () => {

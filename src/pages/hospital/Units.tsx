@@ -3,11 +3,11 @@ import { DataTable } from "@/components/shared/DataTable";
 import { StatusPill } from "@/components/shared/StatusPill";
 
 const columns = [
-  { key: "name" as const, label: "Nome" },
-  { key: "address" as const, label: "Endereço" },
-  { key: "phone" as const, label: "Telefone" },
-  { key: "doctors" as const, label: "Médicos" },
-  { key: "status" as const, label: "Estado", render: (v: string) => <StatusPill status={v as any} /> },
+  { key: "name", header: "Nome" },
+  { key: "address", header: "Endereço" },
+  { key: "phone", header: "Telefone" },
+  { key: "doctors", header: "Médicos" },
+  { key: "status", header: "Estado", render: (row: any) => <StatusPill status={row.status} /> },
 ];
 
 const HospitalUnits = () => (

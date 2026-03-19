@@ -7,13 +7,13 @@ import { toast } from "sonner";
 
 const HospitalAppointments = () => {
   const columns = [
-    { key: "patient" as const, label: "Paciente" },
-    { key: "doctor" as const, label: "Médico" },
-    { key: "specialty" as const, label: "Especialidade" },
-    { key: "date" as const, label: "Data" },
-    { key: "time" as const, label: "Hora" },
-    { key: "status" as const, label: "Estado", render: (v: string) => <StatusPill status={v as any} /> },
-    { key: "id" as const, label: "Ações", render: (_: string, row: any) => row.status === "pending" ? (
+    { key: "patient", header: "Paciente" },
+    { key: "doctor", header: "Médico" },
+    { key: "specialty", header: "Especialidade" },
+    { key: "date", header: "Data" },
+    { key: "time", header: "Hora" },
+    { key: "status", header: "Estado", render: (row: any) => <StatusPill status={row.status} /> },
+    { key: "id", header: "Ações", render: (row: any) => row.status === "pending" ? (
       <div className="flex gap-1">
         <Button size="sm" variant="outline" className="h-7 w-7 p-0" onClick={() => toast.success("Consulta aprovada!")}><Check className="h-3.5 w-3.5 text-success" /></Button>
         <Button size="sm" variant="outline" className="h-7 w-7 p-0" onClick={() => toast.info("Consulta rejeitada")}><X className="h-3.5 w-3.5 text-destructive" /></Button>

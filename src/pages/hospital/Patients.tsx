@@ -9,11 +9,11 @@ import { Plus, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 const columns = [
-  { key: "name" as const, label: "Nome" },
-  { key: "email" as const, label: "Email" },
-  { key: "phone" as const, label: "Telefone" },
-  { key: "lastVisit" as const, label: "Última Visita" },
-  { key: "totalVisits" as const, label: "Visitas" },
+  { key: "name", header: "Nome" },
+  { key: "email", header: "Email" },
+  { key: "phone", header: "Telefone" },
+  { key: "lastVisit", header: "Última Visita" },
+  { key: "totalVisits", header: "Visitas" },
 ];
 
 const HospitalPatients = () => {

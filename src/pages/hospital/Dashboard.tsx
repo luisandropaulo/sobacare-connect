@@ -1,5 +1,5 @@
 import { StatsCard } from "@/components/shared/StatsCard";
-import { Calendar, ClipboardList, Stethoscope, Users, TrendingUp, Clock } from "lucide-react";
+import { Calendar, Clock, Stethoscope, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusPill } from "@/components/shared/StatusPill";
 import { hospitalKpis, hospitalAppointments, hospitalAppointmentsByDay } from "@/data/hospitalMockData";
@@ -15,7 +15,7 @@ const HospitalDashboard = () => {
         <StatsCard title="Médicos" value={hospitalKpis.totalDoctors} icon={Stethoscope} />
         <StatsCard title="Pacientes" value={hospitalKpis.totalPatients} icon={Users} />
         <StatsCard title="Consultas Hoje" value={hospitalKpis.appointmentsToday} icon={Calendar} />
-        <StatsCard title="Aprovações Pendentes" value={hospitalKpis.pendingApprovals} icon={Clock} trend={{ value: 2, isPositive: false }} />
+        <StatsCard title="Aprovações Pendentes" value={hospitalKpis.pendingApprovals} icon={Clock} change="+2" changeType="negative" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
