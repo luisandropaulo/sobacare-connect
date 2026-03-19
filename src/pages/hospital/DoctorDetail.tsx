@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { hospitalDoctors, hospitalAppointments } from "@/data/hospitalMockData";
 import { ProfileHeader } from "@/components/shared/ProfileHeader";
 import { InfoCard } from "@/components/shared/InfoCard";
@@ -13,6 +13,7 @@ import { toast } from "sonner";
 
 const HospitalDoctorDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const doctor = hospitalDoctors.find((d) => d.id === id);
 
   if (!doctor) return <EmptyState title="Médico não encontrado" />;
@@ -31,7 +32,9 @@ const HospitalDoctorDetail = () => {
           { label: doctor.name },
         ]}
         actions={
-          <Button variant="outline" onClick={() => toast.info("Editar")}><Edit className="h-4 w-4 mr-2" />Editar</Button>
+          <Button variant="outline" onClick={() => toast.info("Página de edição em desenvolvimento")}>
+            <Edit className="h-4 w-4 mr-2" />Editar
+          </Button>
         }
       />
 

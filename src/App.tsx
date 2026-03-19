@@ -41,7 +41,6 @@ import PatientAppointments from "./pages/patient/Appointments";
 import CreateAppointment from "./pages/patient/CreateAppointment";
 import PatientConsultations from "./pages/patient/Consultations";
 import PatientPrescriptions from "./pages/patient/Prescriptions";
-import PatientDocuments from "./pages/patient/Documents";
 import PatientFamily from "./pages/patient/Family";
 import PatientReports from "./pages/patient/Reports";
 import PatientSettings from "./pages/patient/Settings";
@@ -110,7 +109,6 @@ const App = () => (
               <Route path="appointments/create" element={<CreateAppointment />} />
               <Route path="consultations" element={<PatientConsultations />} />
               <Route path="prescriptions" element={<PatientPrescriptions />} />
-              <Route path="documents" element={<PatientDocuments />} />
               <Route path="family" element={<PatientFamily />} />
               <Route path="reports" element={<PatientReports />} />
               <Route path="settings" element={<PatientSettings />} />

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { patients, appointments } from "@/data/mockData";
 import { ProfileHeader } from "@/components/shared/ProfileHeader";
 import { InfoCard } from "@/components/shared/InfoCard";
@@ -13,6 +13,7 @@ import { toast } from "sonner";
 
 const PatientDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const patient = patients.find((p) => p.id === id);
 
   if (!patient) return <EmptyState title="Paciente não encontrado" description="O paciente solicitado não existe." />;
@@ -32,7 +33,7 @@ const PatientDetail = () => {
         ]}
         actions={
           <>
-            <Button variant="outline" onClick={() => toast.info("Editar paciente")}><Edit className="h-4 w-4 mr-2" />Editar</Button>
+            <Button variant="outline" onClick={() => toast.info("Página de edição em desenvolvimento")}><Edit className="h-4 w-4 mr-2" />Editar</Button>
             <Button onClick={() => toast.info("Agendar consulta")}><CalendarPlus className="h-4 w-4 mr-2" />Agendar Consulta</Button>
           </>
         }
@@ -51,15 +52,12 @@ const PatientDetail = () => {
             label: "Informações",
             content: (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <InfoCard
-                  title="Dados Pessoais"
-                  items={[
-                    { label: "Nome", value: patient.name, icon: Users },
-                    { label: "Email", value: patient.email, icon: Mail },
-                    { label: "Telefone", value: patient.phone, icon: Phone },
-                    { label: "Última Visita", value: patient.lastVisit, icon: Calendar },
-                  ]}
-                />
+                <InfoCard title="Dados Pessoais" items={[
+                  { label: "Nome", value: patient.name, icon: Users },
+                  { label: "Email", value: patient.email, icon: Mail },
+                  { label: "Telefone", value: patient.phone, icon: Phone },
+                  { label: "Última Visita", value: patient.lastVisit, icon: Calendar },
+                ]} />
               </div>
             ),
           },
@@ -68,16 +66,13 @@ const PatientDetail = () => {
             label: "Histórico",
             content: (
               <div className="mt-4">
-                <DataTable
-                  data={patientAppointments}
-                  columns={[
-                    { key: "doctor", header: "Médico" },
-                    { key: "specialty", header: "Especialidade" },
-                    { key: "date", header: "Data" },
-                    { key: "time", header: "Hora" },
-                    { key: "status", header: "Estado", render: (r) => <StatusPill status={r.status} /> },
-                  ]}
-                />
+                <DataTable data={patientAppointments} columns={[
+                  { key: "doctor", header: "Médico" },
+                  { key: "specialty", header: "Especialidade" },
+                  { key: "date", header: "Data" },
+                  { key: "time", header: "Hora" },
+                  { key: "status", header: "Estado", render: (r) => <StatusPill status={r.status} /> },
+                ]} />
               </div>
             ),
           },

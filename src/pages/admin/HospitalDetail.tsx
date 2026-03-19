@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { hospitals, doctors, patients } from "@/data/mockData";
 import { ProfileHeader } from "@/components/shared/ProfileHeader";
 import { InfoCard } from "@/components/shared/InfoCard";
@@ -14,6 +14,7 @@ import { toast } from "sonner";
 
 const HospitalDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const hospital = hospitals.find((h) => h.id === id);
 
   if (!hospital) return <EmptyState title="Hospital não encontrado" description="O hospital solicitado não existe." />;
@@ -33,7 +34,7 @@ const HospitalDetail = () => {
         ]}
         actions={
           <>
-            <Button variant="outline" onClick={() => toast.info("Editar hospital")}><Edit className="h-4 w-4 mr-2" />Editar</Button>
+            <Button variant="outline" onClick={() => toast.info("Página de edição em desenvolvimento")}><Edit className="h-4 w-4 mr-2" />Editar</Button>
             <Button onClick={() => toast.info("Ver estatísticas")}><BarChart3 className="h-4 w-4 mr-2" />Estatísticas</Button>
           </>
         }
@@ -53,21 +54,15 @@ const HospitalDetail = () => {
             label: "Informações",
             content: (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <InfoCard
-                  title="Dados da Instituição"
-                  items={[
-                    { label: "Nome", value: hospital.name, icon: Building },
-                    { label: "Localização", value: hospital.location, icon: MapPin },
-                    { label: "Plano", value: <Badge variant="outline">{hospital.plan}</Badge>, icon: CreditCard },
-                  ]}
-                />
-                <InfoCard
-                  title="Estatísticas"
-                  items={[
-                    { label: "Médicos", value: hospital.doctors, icon: Stethoscope },
-                    { label: "Pacientes", value: hospital.patients, icon: Users },
-                  ]}
-                />
+                <InfoCard title="Dados da Instituição" items={[
+                  { label: "Nome", value: hospital.name, icon: Building },
+                  { label: "Localização", value: hospital.location, icon: MapPin },
+                  { label: "Plano", value: <Badge variant="outline">{hospital.plan}</Badge>, icon: CreditCard },
+                ]} />
+                <InfoCard title="Estatísticas" items={[
+                  { label: "Médicos", value: hospital.doctors, icon: Stethoscope },
+                  { label: "Pacientes", value: hospital.patients, icon: Users },
+                ]} />
               </div>
             ),
           },
@@ -76,16 +71,12 @@ const HospitalDetail = () => {
             label: "Médicos",
             content: (
               <div className="mt-4">
-                <DataTable
-                  data={hospitalDoctors}
-                  columns={[
-                    { key: "name", header: "Nome" },
-                    { key: "specialty", header: "Especialidade" },
-                    { key: "patients", header: "Pacientes" },
-                    { key: "status", header: "Estado", render: (r) => <StatusPill status={r.status} /> },
-                  ]}
-                  searchKey="name"
-                />
+                <DataTable data={hospitalDoctors} columns={[
+                  { key: "name", header: "Nome" },
+                  { key: "specialty", header: "Especialidade" },
+                  { key: "patients", header: "Pacientes" },
+                  { key: "status", header: "Estado", render: (r) => <StatusPill status={r.status} /> },
+                ]} searchKey="name" />
               </div>
             ),
           },
