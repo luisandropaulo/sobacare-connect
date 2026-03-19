@@ -46,6 +46,8 @@ import PatientSettings from "./pages/patient/Settings";
 import HospitalLayout from "./layouts/HospitalLayout";
 import HospitalDashboard from "./pages/hospital/Dashboard";
 import HospitalDoctors from "./pages/hospital/Doctors";
+import HospitalDoctorDetail from "./pages/hospital/DoctorDetail";
+import HospitalPatientDetail from "./pages/hospital/PatientDetail";
 import HospitalPatients from "./pages/hospital/Patients";
 import HospitalAppointments from "./pages/hospital/Appointments";
 import HospitalCalendar from "./pages/hospital/Calendar";
