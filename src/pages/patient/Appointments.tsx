@@ -32,10 +32,11 @@ const PatientAppointments = () => {
           <h1 className="text-2xl font-bold">Consultas</h1>
           <p className="text-muted-foreground">Gerir as suas marcações.</p>
         </div>
+        <Button onClick={() => window.location.href = "/dashboard/patient/appointments/create"}>
+          <Plus className="h-4 w-4 mr-2" />Agendar Consulta
+        </Button>
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button><Plus className="h-4 w-4 mr-2" />Agendar Consulta</Button>
-          </DialogTrigger>
+          <DialogTrigger asChild><span /></DialogTrigger>
           <DialogContent>
             <DialogHeader><DialogTitle>Agendar Nova Consulta</DialogTitle></DialogHeader>
             <form onSubmit={handleSchedule} className="space-y-4">
