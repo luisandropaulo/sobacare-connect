@@ -4,7 +4,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { LogOut, User } from "lucide-react";
 
 export function PatientHeader() {
@@ -31,8 +31,13 @@ export function PatientHeader() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem className="gap-2"><User className="h-4 w-4" />{user?.name}</DropdownMenuItem>
-            <DropdownMenuItem className="gap-2 text-destructive" onClick={handleLogout}><LogOut className="h-4 w-4" />Sair</DropdownMenuItem>
+            <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/dashboard/patient/profile")}>
+              <User className="h-4 w-4" />{user?.name}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="gap-2 text-destructive cursor-pointer" onClick={handleLogout}>
+              <LogOut className="h-4 w-4" />Sair
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
