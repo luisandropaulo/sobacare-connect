@@ -2,9 +2,10 @@ import { DataTable, Column } from "@/components/shared/DataTable";
 import { StatusPill } from "@/components/shared/StatusPill";
 import { hospitals, MockHospital } from "@/data/mockData";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 const columns: Column<MockHospital>[] = [
-  { key: "name", header: "Hospital" },
+  { key: "name", header: "Hospital", render: (row) => <Link to={`/admin/master/hospitals/${row.id}`} className="text-primary hover:underline cursor-pointer font-medium">{row.name}</Link> },
   { key: "location", header: "Localização" },
   { key: "plan", header: "Plano", render: (row) => <Badge variant="outline">{row.plan}</Badge> },
   { key: "doctors", header: "Médicos" },

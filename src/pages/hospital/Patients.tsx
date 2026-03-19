@@ -7,9 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Upload } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const columns = [
-  { key: "name", header: "Nome" },
+  { key: "name", header: "Nome", render: (row: any) => <Link to={`/dashboard/admin-hospital/patients/${row.id}`} className="text-primary hover:underline cursor-pointer font-medium">{row.name}</Link> },
   { key: "email", header: "Email" },
   { key: "phone", header: "Telefone" },
   { key: "lastVisit", header: "Última Visita" },
