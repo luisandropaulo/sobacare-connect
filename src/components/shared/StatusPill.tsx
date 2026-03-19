@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type StatusVariant = "active" | "inactive" | "confirmed" | "pending" | "cancelled" | "paid" | "overdue" | "open" | "in_progress" | "closed" | "operational" | "degraded" | "down" | "revoked" | "high" | "medium" | "low";
+export type StatusVariant = "active" | "inactive" | "confirmed" | "pending" | "cancelled" | "completed" | "expired" | "paid" | "overdue" | "open" | "in_progress" | "closed" | "operational" | "degraded" | "down" | "revoked" | "high" | "medium" | "low";
 
 const variantStyles: Record<StatusVariant, string> = {
   active: "bg-success/10 text-success",
@@ -8,6 +8,8 @@ const variantStyles: Record<StatusVariant, string> = {
   confirmed: "bg-success/10 text-success",
   pending: "bg-warning/10 text-warning",
   cancelled: "bg-destructive/10 text-destructive",
+  completed: "bg-primary/10 text-primary",
+  expired: "bg-muted text-muted-foreground",
   paid: "bg-success/10 text-success",
   overdue: "bg-destructive/10 text-destructive",
   open: "bg-primary/10 text-primary",
@@ -28,6 +30,8 @@ const labels: Record<StatusVariant, string> = {
   confirmed: "Confirmado",
   pending: "Pendente",
   cancelled: "Cancelado",
+  completed: "Concluído",
+  expired: "Expirado",
   paid: "Pago",
   overdue: "Atrasado",
   open: "Aberto",
