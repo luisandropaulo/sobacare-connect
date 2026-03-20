@@ -25,33 +25,81 @@ const clinics = [
   { img: clinic3, name: "Hospital Saúde", desc: "Atendimento dedicado com profissionais qualificados e certificados.", specialists: 25 },
 ];
 
-const Index = () => (
-  <div className="min-h-screen bg-background">
-    {/* Header */}
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <div className="flex items-center gap-2">
-          <div className="rounded-lg bg-primary p-1.5"><Heart className="h-5 w-5 text-primary-foreground" /></div>
-          <span className="text-xl font-bold">SobaCare</span>
+export const SiteHeader = () => (
+  <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div className="mx-auto flex h-16 items-center justify-between px-6 md:px-12 lg:px-20 max-w-7xl">
+      <Link to="/" className="flex items-center gap-2">
+        <div className="rounded-lg bg-primary p-1.5"><Heart className="h-5 w-5 text-primary-foreground" /></div>
+        <span className="text-xl font-bold">SobaCare</span>
+      </Link>
+      <nav className="hidden md:flex items-center gap-6">
+        <a href="/#home" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</a>
+        <Link to="/agendamento" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Agendamento</Link>
+        <a href="/#sobre-nós" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sobre Nós</a>
+        <a href="/#serviços" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Serviços</a>
+        <a href="/#contacte-nos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contacte-nos</a>
+      </nav>
+      <div className="flex items-center gap-3">
+        <Button variant="outline" asChild><Link to="/login">Login</Link></Button>
+        <Button asChild><Link to="/register">Registar-se</Link></Button>
+      </div>
+    </div>
+  </header>
+);
+
+export const SiteFooter = () => (
+  <footer className="border-t py-10 bg-card">
+    <div className="mx-auto px-6 md:px-12 lg:px-20 max-w-7xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="rounded-lg bg-primary p-1.5"><Heart className="h-4 w-4 text-primary-foreground" /></div>
+            <span className="font-bold">SobaCare</span>
+          </div>
+          <p className="text-xs text-muted-foreground">Mais do que agendar, é cuidar.</p>
         </div>
-        <nav className="hidden md:flex items-center gap-6">
-          <a href="#home" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</a>
-          <Link to="/agendamento" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Agendamento</Link>
-          <a href="#sobre-nós" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sobre Nós</a>
-          <a href="#serviços" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Serviços</a>
-          <a href="#contacte-nos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contacte-nos</a>
-        </nav>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" asChild><Link to="/login">Login</Link></Button>
-          <Button asChild><Link to="/register">Registar-se</Link></Button>
+        <div className="space-y-3">
+          <h4 className="text-sm font-semibold">Links Rápidos</h4>
+          <ul className="space-y-1.5 text-xs text-muted-foreground">
+            <li><a href="/#home" className="hover:text-foreground">Home</a></li>
+            <li><Link to="/agendamento" className="hover:text-foreground">Agendamento</Link></li>
+            <li><a href="/#serviços" className="hover:text-foreground">Serviços</a></li>
+            <li><a href="/#sobre-nós" className="hover:text-foreground">Sobre Nós</a></li>
+            <li><a href="/#contacte-nos" className="hover:text-foreground">Contacte-nos</a></li>
+          </ul>
+        </div>
+        <div className="space-y-3">
+          <h4 className="text-sm font-semibold">Contactos</h4>
+          <ul className="space-y-1.5 text-xs text-muted-foreground">
+            <li>+244 923 123 123 Apoio ao Cliente</li>
+            <li>+244 922 426 789 Suporte Técnico</li>
+            <li>Geral@sobacare.ao</li>
+          </ul>
+        </div>
+        <div className="space-y-3">
+          <h4 className="text-sm font-semibold">Redes Sociais</h4>
+          <div className="flex gap-3">
+            <a href="#" className="text-muted-foreground hover:text-foreground"><Facebook className="h-4 w-4" /></a>
+            <a href="#" className="text-muted-foreground hover:text-foreground"><Instagram className="h-4 w-4" /></a>
+            <a href="#" className="text-muted-foreground hover:text-foreground"><Linkedin className="h-4 w-4" /></a>
+          </div>
         </div>
       </div>
-    </header>
+      <div className="mt-8 pt-6 border-t text-center text-xs text-muted-foreground">
+        © 2025 SobaCare. Todos os direitos reservados. | Privacidade | Termos
+      </div>
+    </div>
+  </footer>
+);
+
+const Index = () => (
+  <div className="min-h-screen bg-background">
+    <SiteHeader />
 
     {/* Hero */}
-    <section id="home" className="container mx-auto px-4 py-12 md:py-16">
-      <div className="grid md:grid-cols-2 gap-10 items-center">
-        <div className="space-y-5">
+    <section id="home" className="mx-auto px-6 md:px-12 lg:px-20 max-w-7xl py-10 md:py-14">
+      <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="space-y-4">
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">Bem-vindo à SobaCare</span>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
             Cuidar com <span className="text-primary">Sabedoria</span>
@@ -75,13 +123,13 @@ const Index = () => (
     </section>
 
     {/* Sobre Nós */}
-    <section id="sobre-nós" className="bg-muted/30 py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+    <section id="sobre-nós" className="bg-muted/30 py-10">
+      <div className="mx-auto px-6 md:px-12 lg:px-20 max-w-7xl">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="flex justify-center">
             <img src={aboutImg} alt="Médica consultando" className="rounded-2xl shadow-lg max-w-sm w-full object-cover" />
           </div>
-          <div className="space-y-5">
+          <div className="space-y-4">
             <h2 className="text-3xl font-bold">Sobre Nós</h2>
             <p className="text-muted-foreground leading-relaxed">
               A SobaCare nasceu com um propósito simples: aproximar as pessoas aos cuidados de saúde de forma digna, rápida e acessível.
@@ -106,11 +154,11 @@ const Index = () => (
     </section>
 
     {/* Nossos Serviços */}
-    <section id="serviços" className="py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+    <section id="serviços" className="py-10">
+      <div className="mx-auto px-6 md:px-12 lg:px-20 max-w-7xl">
+        <div className="text-center mb-6">
           <h2 className="text-3xl font-bold">Nossos Serviços</h2>
-          <p className="text-muted-foreground mt-2">Soluções completas para sua saúde e bem-estar</p>
+          <p className="text-muted-foreground mt-1.5">Soluções completas para sua saúde e bem-estar</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {services.map(s => (
@@ -127,11 +175,11 @@ const Index = () => (
     </section>
 
     {/* Clínicas Parceiras */}
-    <section className="bg-muted/30 py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+    <section className="bg-muted/30 py-10">
+      <div className="mx-auto px-6 md:px-12 lg:px-20 max-w-7xl">
+        <div className="text-center mb-6">
           <h2 className="text-3xl font-bold">Clínicas Parceiras</h2>
-          <p className="text-muted-foreground mt-2">Conectamos a sua clínica a mais pacientes</p>
+          <p className="text-muted-foreground mt-1.5">Conectamos a sua clínica a mais pacientes</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {clinics.map(c => (
@@ -150,13 +198,13 @@ const Index = () => (
     </section>
 
     {/* Contacte-nos */}
-    <section id="contacte-nos" className="py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+    <section id="contacte-nos" className="py-10">
+      <div className="mx-auto px-6 md:px-12 lg:px-20 max-w-7xl">
+        <div className="text-center mb-6">
           <h2 className="text-3xl font-bold">Contacte-nos</h2>
-          <p className="text-muted-foreground mt-2">Estamos aqui para responder suas dúvidas</p>
+          <p className="text-muted-foreground mt-1.5">Estamos aqui para responder suas dúvidas</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-6">
           <Card className="text-center border-0 shadow-sm">
             <CardContent className="pt-6 space-y-2">
               <div className="mx-auto w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center"><Phone className="h-5 w-5 text-destructive" /></div>
@@ -199,49 +247,7 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Footer */}
-    <footer className="border-t py-10 bg-card">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="rounded-lg bg-primary p-1.5"><Heart className="h-4 w-4 text-primary-foreground" /></div>
-              <span className="font-bold">SobaCare</span>
-            </div>
-            <p className="text-xs text-muted-foreground">Mais do que agendar, é cuidar.</p>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Links Rápidos</h4>
-            <ul className="space-y-1.5 text-xs text-muted-foreground">
-              <li><a href="#home" className="hover:text-foreground">Home</a></li>
-              <li><Link to="/agendamento" className="hover:text-foreground">Agendamento</Link></li>
-              <li><a href="#serviços" className="hover:text-foreground">Serviços</a></li>
-              <li><a href="#sobre-nós" className="hover:text-foreground">Sobre Nós</a></li>
-              <li><a href="#contacte-nos" className="hover:text-foreground">Contacte-nos</a></li>
-            </ul>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Contactos</h4>
-            <ul className="space-y-1.5 text-xs text-muted-foreground">
-              <li>+244 923 123 123 Apoio ao Cliente</li>
-              <li>+244 922 426 789 Suporte Técnico</li>
-              <li>Geral@sobacare.ao</li>
-            </ul>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Redes Sociais</h4>
-            <div className="flex gap-3">
-              <a href="#" className="text-muted-foreground hover:text-foreground"><Facebook className="h-4 w-4" /></a>
-              <a href="#" className="text-muted-foreground hover:text-foreground"><Instagram className="h-4 w-4" /></a>
-              <a href="#" className="text-muted-foreground hover:text-foreground"><Linkedin className="h-4 w-4" /></a>
-            </div>
-          </div>
-        </div>
-        <div className="mt-8 pt-6 border-t text-center text-xs text-muted-foreground">
-          © 2025 SobaCare. Todos os direitos reservados. | Privacidade | Termos
-        </div>
-      </div>
-    </footer>
+    <SiteFooter />
   </div>
 );
 

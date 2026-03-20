@@ -5,6 +5,34 @@ import { Button } from "@/components/ui/button";
 import { Download, Pill } from "lucide-react";
 import { toast } from "sonner";
 
+const generatePrescriptionText = (rx: typeof prescriptions[0]) => {
+  const lines = [
+    `PRESCRIÇÃO MÉDICA — SobaCare`,
+    `Diagnóstico: ${rx.diagnosis}`,
+    `Médico: ${rx.doctor}`,
+    `Data: ${rx.date}`,
+    `Estado: ${rx.status === "active" ? "Activa" : "Expirada"}`,
+    ``,
+    `MEDICAMENTOS:`,
+    ...rx.medications.map((m, i) => `${i + 1}. ${m.name} — ${m.dosage}, ${m.frequency}`),
+  ];
+  return lines.join("\n");
+};
+
+const handleDownload = (rx: typeof prescriptions[0]) => {
+  const text = generatePrescriptionText(rx);
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `prescricao_${rx.id}_${rx.date}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast.success("Prescrição descarregada com sucesso");
+};
+
 const PatientPrescriptions = () => (
   <div className="space-y-6">
     <div>
@@ -24,7 +52,9 @@ const PatientPrescriptions = () => (
             </div>
             <div className="flex items-center gap-2">
               <StatusPill status={rx.status} />
-              <Button variant="outline" size="sm" onClick={() => toast.success("Download iniciado")}><Download className="h-4 w-4" /></Button>
+              <Button variant="outline" size="sm" onClick={() => handleDownload(rx)}>
+                <Download className="h-4 w-4 mr-1" /> Download
+              </Button>
             </div>
           </CardHeader>
           <CardContent>

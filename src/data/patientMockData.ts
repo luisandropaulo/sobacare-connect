@@ -51,14 +51,65 @@ export const patientDocuments: PatientDocument[] = [
 export interface FamilyMember {
   id: string;
   name: string;
+  firstName: string;
+  lastName: string;
   relationship: string;
   email: string;
   phone: string;
+  dob: string;
+  gender: string;
+  isHead: boolean;
+  medicalHistory: string[];
+  appointments: { date: string; doctor: string; specialty: string; status: string }[];
 }
 
 export const familyMembers: FamilyMember[] = [
-  { id: "fm1", name: "Maria Silva", relationship: "Mãe", email: "maria.silva@email.com", phone: "+244 912 111 222" },
-  { id: "fm2", name: "Carlos Silva", relationship: "Pai", email: "carlos.silva@email.com", phone: "+244 923 333 444" },
+  {
+    id: "fm1",
+    name: "Maria Silva",
+    firstName: "Maria",
+    lastName: "Silva",
+    relationship: "Mãe",
+    email: "maria.silva@email.com",
+    phone: "+244 912 111 222",
+    dob: "1968-05-14",
+    gender: "Feminino",
+    isHead: false,
+    medicalHistory: ["Diabetes tipo 2", "Hipertensão arterial"],
+    appointments: [
+      { date: "2026-03-28", doctor: "Dr. João Pedro", specialty: "Cardiologia", status: "confirmed" },
+    ],
+  },
+  {
+    id: "fm2",
+    name: "Carlos Silva",
+    firstName: "Carlos",
+    lastName: "Silva",
+    relationship: "Pai",
+    email: "carlos.silva@email.com",
+    phone: "+244 923 333 444",
+    dob: "1965-11-02",
+    gender: "Masculino",
+    isHead: false,
+    medicalHistory: ["Colesterol elevado"],
+    appointments: [
+      { date: "2026-04-05", doctor: "Dra. Luísa Costa", specialty: "Medicina Geral", status: "pending" },
+    ],
+  },
+  {
+    id: "fm3",
+    name: "Ana Silva",
+    firstName: "Ana",
+    lastName: "Silva",
+    relationship: "Filho(a)",
+    email: "ana.silva@email.com",
+    phone: "+244 934 555 666",
+    dob: "2010-08-22",
+    gender: "Feminino",
+    isHead: false,
+    medicalHistory: ["Asma leve"],
+    appointments: [],
+  },
 ];
 
 export const patientConsultations = [
