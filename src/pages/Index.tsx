@@ -25,63 +25,46 @@ const clinics = [
   { img: clinic3, name: "Hospital Saúde", desc: "Atendimento dedicado com profissionais qualificados e certificados.", specialists: 25 },
 ];
 
-const navLinks = ["Home", "Agendamento", "Sobre Nós", "Serviços", "Contacte-nos"];
-
 const Index = () => (
   <div className="min-h-screen bg-background">
     {/* Header */}
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <div className="rounded-lg bg-primary p-1.5">
-            <Heart className="h-5 w-5 text-primary-foreground" />
-          </div>
+          <div className="rounded-lg bg-primary p-1.5"><Heart className="h-5 w-5 text-primary-foreground" /></div>
           <span className="text-xl font-bold">SobaCare</span>
         </div>
         <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map(l => (
-            <a key={l} href={`#${l.toLowerCase().replace(/\s/g, "-")}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{l}</a>
-          ))}
+          <a href="#home" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</a>
+          <Link to="/agendamento" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Agendamento</Link>
+          <a href="#sobre-nós" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sobre Nós</a>
+          <a href="#serviços" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Serviços</a>
+          <a href="#contacte-nos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contacte-nos</a>
         </nav>
         <div className="flex items-center gap-3">
-          <Button variant="outline" asChild>
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button asChild>
-            <Link to="/register">Registar-se</Link>
-          </Button>
+          <Button variant="outline" asChild><Link to="/login">Login</Link></Button>
+          <Button asChild><Link to="/register">Registar-se</Link></Button>
         </div>
       </div>
     </header>
 
     {/* Hero */}
-    <section id="home" className="container mx-auto px-4 py-16 md:py-24">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-            Bem-vindo à SobaCare
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-            Cuidar com{" "}
-            <span className="text-primary">Sabedoria</span>
+    <section id="home" className="container mx-auto px-4 py-12 md:py-16">
+      <div className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="space-y-5">
+          <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">Bem-vindo à SobaCare</span>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+            Cuidar com <span className="text-primary">Sabedoria</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-lg">
-            A SobaCare conecta pacientes e profissionais de saúde, permitindo marcação de consultas rápida e eficaz. Aproximando pessoas aos cuidados que merecem.
+            A SobaCare conecta pacientes e profissionais de saúde, permitindo marcação de consultas rápida e eficaz.
           </p>
           <div className="flex gap-3">
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button size="lg" asChild>
-              <Link to="/register">Registar-se</Link>
-            </Button>
+            <Button variant="outline" size="lg" asChild><Link to="/login">Login</Link></Button>
+            <Button size="lg" asChild><Link to="/register">Registar-se</Link></Button>
           </div>
-          <div className="flex items-center gap-2 pt-2">
-            <div className="flex">
-              {[1, 2, 3, 4, 5].map(i => (
-                <Star key={i} className="h-4 w-4 fill-warning text-warning" />
-              ))}
-            </div>
+          <div className="flex items-center gap-2 pt-1">
+            <div className="flex">{[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-warning text-warning" />)}</div>
             <span className="text-sm text-muted-foreground">4.9/5 · 2.000+ Pacientes Satisfeitos</span>
           </div>
         </div>
@@ -92,21 +75,21 @@ const Index = () => (
     </section>
 
     {/* Sobre Nós */}
-    <section id="sobre-nós" className="bg-muted/30 py-20">
+    <section id="sobre-nós" className="bg-muted/30 py-12">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="flex justify-center">
-            <img src={aboutImg} alt="Médica consultando paciente" className="rounded-2xl shadow-lg max-w-sm w-full object-cover" />
+            <img src={aboutImg} alt="Médica consultando" className="rounded-2xl shadow-lg max-w-sm w-full object-cover" />
           </div>
-          <div className="space-y-6">
+          <div className="space-y-5">
             <h2 className="text-3xl font-bold">Sobre Nós</h2>
             <p className="text-muted-foreground leading-relaxed">
               A SobaCare nasceu com um propósito simples: aproximar as pessoas aos cuidados de saúde de forma digna, rápida e acessível.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Criámos uma plataforma digital prática e intuitiva, onde você pode agendar atendimentos, acompanhar a sua saúde, e da sua família com profissionais confiáveis.
+              Criámos uma plataforma digital prática e intuitiva, onde você pode agendar atendimentos e acompanhar a sua saúde.
             </p>
-            <div className="flex gap-6 pt-4">
+            <div className="flex gap-6 pt-2">
               <div className="rounded-xl border-2 border-primary/20 px-6 py-4 text-center">
                 <p className="text-2xl font-bold text-primary">2.5K+</p>
                 <p className="text-xs text-muted-foreground">Pacientes Ativos</p>
@@ -116,27 +99,23 @@ const Index = () => (
                 <p className="text-xs text-muted-foreground">Profissionais</p>
               </div>
             </div>
-            <Button asChild>
-              <Link to="/register">Explorar Serviços</Link>
-            </Button>
+            <Button asChild><Link to="/register">Explorar Serviços</Link></Button>
           </div>
         </div>
       </div>
     </section>
 
     {/* Nossos Serviços */}
-    <section id="serviços" className="py-20">
+    <section id="serviços" className="py-12">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl font-bold">Nossos Serviços</h2>
           <p className="text-muted-foreground mt-2">Soluções completas para sua saúde e bem-estar</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {services.map(s => (
             <Card key={s.title} className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow">
-              <div className="h-48 overflow-hidden">
-                <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
-              </div>
+              <div className="h-48 overflow-hidden"><img src={s.img} alt={s.title} className="w-full h-full object-cover" /></div>
               <CardContent className="pt-5 space-y-2">
                 <h3 className="font-semibold text-lg">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.desc}</p>
@@ -148,23 +127,21 @@ const Index = () => (
     </section>
 
     {/* Clínicas Parceiras */}
-    <section className="bg-muted/30 py-20">
+    <section className="bg-muted/30 py-12">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl font-bold">Clínicas Parceiras</h2>
-          <p className="text-muted-foreground mt-2">A SobaCare conecta sua clínica a mais pacientes, tudo numa plataforma moderna, segura e fácil de usar.</p>
+          <p className="text-muted-foreground mt-2">Conectamos a sua clínica a mais pacientes</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {clinics.map(c => (
             <Card key={c.name} className="overflow-hidden border-0 shadow-sm">
-              <div className="h-48 overflow-hidden">
-                <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
-              </div>
-              <CardContent className="pt-5 space-y-3">
+              <div className="h-48 overflow-hidden"><img src={c.img} alt={c.name} className="w-full h-full object-cover" /></div>
+              <CardContent className="pt-5 space-y-2">
                 <h3 className="font-semibold text-lg">{c.name}</h3>
                 <p className="text-sm text-muted-foreground">{c.desc}</p>
                 <p className="text-xs text-muted-foreground">{c.specialists} especialidades</p>
-                <Button className="w-full">Saiba Mais</Button>
+                <Button className="w-full" asChild><Link to="/register">Saiba Mais</Link></Button>
               </CardContent>
             </Card>
           ))}
@@ -173,43 +150,35 @@ const Index = () => (
     </section>
 
     {/* Contacte-nos */}
-    <section id="contacte-nos" className="py-20">
+    <section id="contacte-nos" className="py-12">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl font-bold">Contacte-nos</h2>
-          <p className="text-muted-foreground mt-2">Estamos aqui para responder suas dúvidas e preocupações</p>
+          <p className="text-muted-foreground mt-2">Estamos aqui para responder suas dúvidas</p>
         </div>
-
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Card className="text-center border-0 shadow-sm">
             <CardContent className="pt-6 space-y-2">
-              <div className="mx-auto w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
-                <Phone className="h-5 w-5 text-destructive" />
-              </div>
+              <div className="mx-auto w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center"><Phone className="h-5 w-5 text-destructive" /></div>
               <p className="text-sm font-medium">Telefone</p>
               <p className="text-sm text-muted-foreground">+244 923 123 123</p>
             </CardContent>
           </Card>
           <Card className="text-center border-0 shadow-sm">
             <CardContent className="pt-6 space-y-2">
-              <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Mail className="h-5 w-5 text-primary" />
-              </div>
+              <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"><Mail className="h-5 w-5 text-primary" /></div>
               <p className="text-sm font-medium">Email</p>
               <p className="text-sm text-muted-foreground">geral@sobacare.ao</p>
             </CardContent>
           </Card>
           <Card className="text-center border-0 shadow-sm">
             <CardContent className="pt-6 space-y-2">
-              <div className="mx-auto w-12 h-12 rounded-full bg-warning/10 flex items-center justify-center">
-                <MapPin className="h-5 w-5 text-warning" />
-              </div>
+              <div className="mx-auto w-12 h-12 rounded-full bg-warning/10 flex items-center justify-center"><MapPin className="h-5 w-5 text-warning" /></div>
               <p className="text-sm font-medium">Localização</p>
               <p className="text-sm text-muted-foreground">Luanda, Angola</p>
             </CardContent>
           </Card>
         </div>
-
         <Card className="max-w-2xl mx-auto border-0 shadow-sm">
           <CardContent className="pt-6">
             <h3 className="text-xl font-semibold mb-4">Fale connosco</h3>
@@ -230,29 +199,8 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Bottom Nav */}
-    <div className="border-t bg-muted/30">
-      <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <div className="rounded-lg bg-primary p-1.5">
-            <Heart className="h-4 w-4 text-primary-foreground" />
-          </div>
-          <span className="text-sm font-semibold">SobaCare</span>
-        </div>
-        <nav className="flex items-center gap-6">
-          {navLinks.map(l => (
-            <a key={l} href={`#${l.toLowerCase().replace(/\s/g, "-")}`} className="text-xs text-muted-foreground hover:text-foreground">{l}</a>
-          ))}
-        </nav>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" asChild><Link to="/login">Login</Link></Button>
-          <Button size="sm" asChild><Link to="/register">Registar-se</Link></Button>
-        </div>
-      </div>
-    </div>
-
     {/* Footer */}
-    <footer className="border-t py-12 bg-card">
+    <footer className="border-t py-10 bg-card">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-3">
@@ -266,7 +214,7 @@ const Index = () => (
             <h4 className="text-sm font-semibold">Links Rápidos</h4>
             <ul className="space-y-1.5 text-xs text-muted-foreground">
               <li><a href="#home" className="hover:text-foreground">Home</a></li>
-              <li><Link to="/register" className="hover:text-foreground">Agendamento</Link></li>
+              <li><Link to="/agendamento" className="hover:text-foreground">Agendamento</Link></li>
               <li><a href="#serviços" className="hover:text-foreground">Serviços</a></li>
               <li><a href="#sobre-nós" className="hover:text-foreground">Sobre Nós</a></li>
               <li><a href="#contacte-nos" className="hover:text-foreground">Contacte-nos</a></li>
