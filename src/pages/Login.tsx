@@ -18,7 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<UserRole>("admin-master");
+  const [role, setRole] = useState<UserRole>("patient");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,9 +31,7 @@ const Login = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="rounded-lg bg-primary p-2">
-              <Heart className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <div className="rounded-lg bg-primary p-2"><Heart className="h-5 w-5 text-primary-foreground" /></div>
             <span className="text-xl font-bold">SobaCare</span>
           </div>
           <CardTitle className="text-2xl">Iniciar Sessão</CardTitle>
@@ -43,24 +41,17 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <Input id="email" type="email" placeholder="seu@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Palavra-passe</Label>
-              <Input id="password" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <Input id="password" type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label>Perfil</Label>
               <div className="grid grid-cols-3 gap-2">
-                {([["patient", "Paciente"], ["hospital", "Hospital"], ["admin-master", "Admin Master"]] as [UserRole, string][]).map(([value, label]) => (
-                  <Button
-                    key={value}
-                    type="button"
-                    variant={role === value ? "default" : "outline"}
-                    size="sm"
-                    className="text-xs"
-                    onClick={() => setRole(value)}
-                  >
+                {([["patient", "Paciente"], ["hospital", "Hospital"], ["admin-master", "Admin"]] as [UserRole, string][]).map(([value, label]) => (
+                  <Button key={value} type="button" variant={role === value ? "default" : "outline"} size="sm" className="text-xs" onClick={() => setRole(value)}>
                     {label}
                   </Button>
                 ))}

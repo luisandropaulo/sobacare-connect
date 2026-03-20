@@ -7,6 +7,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import HospitalSetup from "./pages/HospitalSetup";
+import Agendamento from "./pages/Agendamento";
 import NotFound from "./pages/NotFound";
 
 import AdminLayout from "./layouts/AdminLayout";
@@ -34,6 +36,7 @@ import SupportPage from "./pages/admin/Support";
 import NotificationsPage from "./pages/admin/Notifications";
 import SettingsPage from "./pages/admin/Settings";
 import AdminProfile from "./pages/admin/Profile";
+import InviteAdminPage from "./pages/admin/InviteAdmin";
 
 import PatientLayout from "./layouts/PatientLayout";
 import PatientDashboard from "./pages/patient/Dashboard";
@@ -75,6 +78,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/hospital-setup" element={<HospitalSetup />} />
+            <Route path="/agendamento" element={<Agendamento />} />
 
             <Route path="/admin/master" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
@@ -101,6 +106,7 @@ const App = () => (
               <Route path="notifications" element={<NotificationsPage />} />
               <Route path="settings" element={<SettingsPage />} />
               <Route path="profile" element={<AdminProfile />} />
+              <Route path="invite-admin" element={<InviteAdminPage />} />
             </Route>
 
             <Route path="/dashboard/patient" element={<PatientLayout />}>
