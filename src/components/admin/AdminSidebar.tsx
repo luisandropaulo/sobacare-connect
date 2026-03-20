@@ -49,6 +49,7 @@ const groups = [
       { title: "Suporte", url: "/admin/master/support", icon: LifeBuoy },
       { title: "Notificações", url: "/admin/master/notifications", icon: Bell },
       { title: "Configurações", url: "/admin/master/settings", icon: Settings },
+      { title: "Convidar Admin", url: "/admin/master/invite-admin", icon: Users },
     ],
   },
 ];
