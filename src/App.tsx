@@ -47,7 +47,7 @@ import PatientPrescriptions from "./pages/patient/Prescriptions";
 import PatientFamily from "./pages/patient/Family";
 import PatientReports from "./pages/patient/Reports";
 import PatientSettings from "./pages/patient/Settings";
-import PatientProfile from "./pages/patient/Profile";
+import PatientSupport from "./pages/patient/Support";
 
 import HospitalLayout from "./layouts/HospitalLayout";
 import HospitalDashboard from "./pages/hospital/Dashboard";
