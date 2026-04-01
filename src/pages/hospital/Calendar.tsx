@@ -6,30 +6,51 @@ import { StatusPill } from "@/components/shared/StatusPill";
 import { hospitalAppointments } from "@/data/hospitalMockData";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+const dayNames = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+
+const getLastMonthWithData = () => {
+  let latest = new Date(2026, 2); // March 2026 default
+  hospitalAppointments.forEach(a => {
+    const d = new Date(a.date);
+    if (d > latest) latest = d;
+  });
+  return { year: latest.getFullYear(), month: latest.getMonth() };
+};
+
 const HospitalCalendar = () => {
+  const [currentYear, setCurrentYear] = useState(2026);
+  const [currentMonth, setCurrentMonth] = useState(2); // March
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedApt, setSelectedApt] = useState<typeof hospitalAppointments[0] | null>(null);
 
-  // Simple March 2026 calendar
-  const year = 2026;
-  const month = 2; // March (0-indexed)
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDay = new Date(year, month, 1).getDay();
-  const offset = firstDay === 0 ? 6 : firstDay - 1; // Mon start
+  const lastData = getLastMonthWithData();
 
+  const canGoNext = currentYear < lastData.year || (currentYear === lastData.year && currentMonth < lastData.month);
+  const canGoPrev = true;
+
+  const goNext = () => {
+    if (!canGoNext) return;
+    if (currentMonth === 11) { setCurrentMonth(0); setCurrentYear(y => y + 1); }
+    else setCurrentMonth(m => m + 1);
+  };
+  const goPrev = () => {
+    if (currentMonth === 0) { setCurrentMonth(11); setCurrentYear(y => y - 1); }
+    else setCurrentMonth(m => m - 1);
+  };
+
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  const offset = firstDay === 0 ? 6 : firstDay - 1;
   const days: (number | null)[] = Array(offset).fill(null);
   for (let i = 1; i <= daysInMonth; i++) days.push(i);
 
-  const dayNames = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
-
   const getAptsForDay = (day: number) => {
-    const dateStr = `2026-03-${String(day).padStart(2, "0")}`;
+    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     return hospitalAppointments.filter(a => a.date === dateStr);
   };
 
-  const selectedDayApts = selectedDate
-    ? hospitalAppointments.filter(a => a.date === selectedDate)
-    : [];
+  const selectedDayApts = selectedDate ? hospitalAppointments.filter(a => a.date === selectedDate) : [];
 
   return (
     <div className="space-y-6">
@@ -41,9 +62,9 @@ const HospitalCalendar = () => {
       <Card>
         <CardContent className="pt-6">
           <div className="flex items-center justify-between mb-4">
-            <Button variant="ghost" size="icon"><ChevronLeft className="h-4 w-4" /></Button>
-            <h2 className="font-semibold text-lg">Março 2026</h2>
-            <Button variant="ghost" size="icon"><ChevronRight className="h-4 w-4" /></Button>
+            <Button variant="ghost" size="icon" onClick={goPrev}><ChevronLeft className="h-4 w-4" /></Button>
+            <h2 className="font-semibold text-lg">{monthNames[currentMonth]} {currentYear}</h2>
+            <Button variant="ghost" size="icon" onClick={goNext} disabled={!canGoNext}><ChevronRight className="h-4 w-4" /></Button>
           </div>
 
           <div className="grid grid-cols-7 gap-px bg-border rounded-lg overflow-hidden">
@@ -53,7 +74,7 @@ const HospitalCalendar = () => {
             {days.map((day, i) => {
               if (!day) return <div key={`empty-${i}`} className="bg-background p-2 min-h-[80px]" />;
               const apts = getAptsForDay(day);
-              const dateStr = `2026-03-${String(day).padStart(2, "0")}`;
+              const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
               const isSelected = selectedDate === dateStr;
               return (
                 <div
@@ -63,11 +84,7 @@ const HospitalCalendar = () => {
                 >
                   <span className="text-sm font-medium">{day}</span>
                   {apts.slice(0, 2).map(a => (
-                    <div
-                      key={a.id}
-                      onClick={(e) => { e.stopPropagation(); setSelectedApt(a); }}
-                      className="mt-1 rounded bg-primary/10 px-1.5 py-0.5 text-[10px] truncate cursor-pointer hover:bg-primary/20"
-                    >
+                    <div key={a.id} onClick={(e) => { e.stopPropagation(); setSelectedApt(a); }} className="mt-1 rounded bg-primary/10 px-1.5 py-0.5 text-[10px] truncate cursor-pointer hover:bg-primary/20">
                       {a.time} {a.patient}
                     </div>
                   ))}
@@ -79,18 +96,13 @@ const HospitalCalendar = () => {
         </CardContent>
       </Card>
 
-      {/* Day panel */}
       {selectedDate && selectedDayApts.length > 0 && (
         <Card>
           <CardContent className="pt-6">
             <h3 className="font-semibold mb-3">Consultas em {selectedDate}</h3>
             <div className="space-y-2">
               {selectedDayApts.map(a => (
-                <div
-                  key={a.id}
-                  onClick={() => setSelectedApt(a)}
-                  className="flex items-center justify-between p-3 rounded-lg border cursor-pointer hover:bg-muted/50"
-                >
+                <div key={a.id} onClick={() => setSelectedApt(a)} className="flex items-center justify-between p-3 rounded-lg border cursor-pointer hover:bg-muted/50">
                   <div>
                     <p className="font-medium text-sm">{a.patient}</p>
                     <p className="text-xs text-muted-foreground">{a.doctor} • {a.specialty} • {a.time}</p>
@@ -103,20 +115,12 @@ const HospitalCalendar = () => {
         </Card>
       )}
 
-      {/* Appointment detail modal */}
       <Dialog open={!!selectedApt} onOpenChange={() => setSelectedApt(null)}>
         <DialogContent>
           <DialogHeader><DialogTitle>Detalhes da Consulta</DialogTitle></DialogHeader>
           {selectedApt && (
             <div className="space-y-3">
-              {[
-                ["Paciente", selectedApt.patient],
-                ["Médico", selectedApt.doctor],
-                ["Departamento", selectedApt.specialty],
-                ["Data", selectedApt.date],
-                ["Hora", selectedApt.time],
-                ["Observações", selectedApt.notes || "—"],
-              ].map(([k, v]) => (
+              {([["Paciente", selectedApt.patient], ["Médico", selectedApt.doctor], ["Departamento", selectedApt.specialty], ["Data", selectedApt.date], ["Hora", selectedApt.time], ["Observações", selectedApt.notes || "—"]] as [string, string][]).map(([k, v]) => (
                 <div key={k} className="flex justify-between border-b pb-2 last:border-0">
                   <span className="text-sm text-muted-foreground">{k}</span>
                   <span className="text-sm font-medium">{v}</span>

@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Plus, Upload } from "lucide-react";
 import { toast } from "sonner";
-
 import { Link } from "react-router-dom";
 
 const columns = [
@@ -37,6 +37,10 @@ const HospitalDoctors = () => {
                 <div className="space-y-2"><Label>Especialidade</Label><Input required /></div>
                 <div className="space-y-2"><Label>Email</Label><Input type="email" required /></div>
                 <div className="space-y-2"><Label>Telefone</Label><Input required /></div>
+                <div className="space-y-2">
+                  <Label>Biografia</Label>
+                  <Textarea placeholder="Escreva uma breve biografia do médico..." className="min-h-[100px]" />
+                </div>
                 <Button type="submit" className="w-full">Adicionar</Button>
               </form>
             </DialogContent>
