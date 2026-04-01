@@ -118,7 +118,7 @@ const App = () => (
               <Route path="family" element={<PatientFamily />} />
               <Route path="reports" element={<PatientReports />} />
               <Route path="settings" element={<PatientSettings />} />
-              <Route path="profile" element={<PatientProfile />} />
+              <Route path="support" element={<PatientSupport />} />
             </Route>
 
             <Route path="/dashboard/admin-hospital" element={<HospitalLayout />}>

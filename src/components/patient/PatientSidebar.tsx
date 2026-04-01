@@ -1,4 +1,4 @@
-import { Calendar, ClipboardList, FileText, Heart, Home, Settings, Stethoscope, Users } from "lucide-react";
+import { Calendar, ClipboardList, FileText, Heart, Home, MessageSquare, Settings, Stethoscope, Users } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
@@ -13,6 +13,7 @@ const items = [
   { title: "Prescrições", url: "/dashboard/patient/prescriptions", icon: ClipboardList },
   { title: "Família", url: "/dashboard/patient/family", icon: Users },
   { title: "Relatórios", url: "/dashboard/patient/reports", icon: FileText },
+  { title: "Suporte", url: "/dashboard/patient/support", icon: MessageSquare },
   { title: "Definições", url: "/dashboard/patient/settings", icon: Settings },
 ];
 
