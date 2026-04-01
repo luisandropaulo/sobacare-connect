@@ -59,6 +59,10 @@ export interface FamilyMember {
   dob: string;
   gender: string;
   isHead: boolean;
+  bloodGroup: string;
+  allergies: string[];
+  chronicConditions: string[];
+  emergencyContact: { name: string; phone: string; relationship: string };
   medicalHistory: string[];
   appointments: { date: string; doctor: string; specialty: string; status: string }[];
 }
