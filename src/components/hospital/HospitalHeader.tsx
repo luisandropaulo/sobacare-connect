@@ -34,6 +34,9 @@ export function HospitalHeader() {
             <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/dashboard/admin-hospital/profile")}>
               <User className="h-4 w-4" />{user?.name}
             </DropdownMenuItem>
+            <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/dashboard/admin-hospital/profile")}>
+              <Settings className="h-4 w-4" />Definições
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2 text-destructive cursor-pointer" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />Sair

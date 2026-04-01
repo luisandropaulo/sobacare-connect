@@ -39,6 +39,9 @@ export const AdminHeader = () => {
             <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/admin/master/profile")}>
               <User className="h-4 w-4" />Meu Perfil
             </DropdownMenuItem>
+            <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/admin/master/settings")}>
+              <Settings className="h-4 w-4" />Definições
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2 text-destructive cursor-pointer" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />Sair
