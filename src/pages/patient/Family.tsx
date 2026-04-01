@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { StatusPill } from "@/components/shared/StatusPill";
-import { Plus, Users, Trash2, Eye, CalendarPlus, ShieldCheck, AlertCircle } from "lucide-react";
+import { Plus, Users, Trash2, Eye, CalendarPlus, ShieldCheck, AlertCircle, Droplets, Heart, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
@@ -26,7 +26,6 @@ const PatientFamily = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Família</h1>
@@ -54,23 +53,33 @@ const PatientFamily = () => {
                   </Select>
                 </div>
               </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-2"><Label>Grupo Sanguíneo</Label>
+                  <Select><SelectTrigger><SelectValue placeholder="Selecionar" /></SelectTrigger>
+                    <SelectContent>
+                      {["A+","A-","B+","B-","AB+","AB-","O+","O-"].map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Parentesco</Label>
+                  <Select><SelectTrigger><SelectValue placeholder="Selecionar" /></SelectTrigger>
+                    <SelectContent>
+                      {["Pai","Mãe","Filho(a)","Cônjuge","Irmão(ã)","Outro"].map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
               <div className="space-y-2"><Label>Email</Label><Input type="email" placeholder="email@exemplo.com" required /></div>
               <div className="space-y-2"><Label>Telefone</Label><Input placeholder="+244 9XX XXX XXX" required /></div>
-              <div className="space-y-2">
-                <Label>Parentesco</Label>
-                <Select><SelectTrigger><SelectValue placeholder="Selecionar" /></SelectTrigger>
-                  <SelectContent>
-                    {["Pai", "Mãe", "Filho(a)", "Cônjuge", "Irmão(ã)", "Outro"].map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}
-                  </SelectContent>
-                </Select>
-              </div>
+              <div className="space-y-2"><Label>Alergias</Label><Input placeholder="Ex: Penicilina, Pólen (separadas por vírgula)" /></div>
+              <div className="space-y-2"><Label>Condições Crónicas</Label><Input placeholder="Ex: Diabetes, Asma (separadas por vírgula)" /></div>
               <Button type="submit" className="w-full">Adicionar</Button>
             </form>
           </DialogContent>
         </Dialog>
       </div>
 
-      {/* Head account info */}
       <Card className="border-primary/30 bg-primary/5">
         <CardContent className="flex items-center gap-3 p-4">
           <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
@@ -81,7 +90,6 @@ const PatientFamily = () => {
         </CardContent>
       </Card>
 
-      {/* Family members list */}
       <div className="grid gap-3">
         {familyMembers.map(fm => (
           <Card key={fm.id}>
@@ -92,6 +100,7 @@ const PatientFamily = () => {
                   <div className="flex items-center gap-2">
                     <p className="font-medium text-sm">{fm.name}</p>
                     <Badge variant="outline" className="text-[10px] px-1.5 py-0">{fm.relationship}</Badge>
+                    {fm.bloodGroup && <Badge variant="secondary" className="text-[10px] px-1.5 py-0"><Droplets className="h-3 w-3 mr-0.5" />{fm.bloodGroup}</Badge>}
                   </div>
                   <p className="text-xs text-muted-foreground">{fm.email} • {fm.phone}</p>
                 </div>
@@ -106,7 +115,6 @@ const PatientFamily = () => {
         ))}
       </div>
 
-      {/* Member detail dialog */}
       <Dialog open={!!viewMember} onOpenChange={open => { if (!open) setViewMember(null); }}>
         <DialogContent className="max-w-lg">
           {viewMember && (
@@ -118,8 +126,9 @@ const PatientFamily = () => {
                 </DialogTitle>
               </DialogHeader>
               <Tabs defaultValue="info" className="mt-2">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="info">Informações</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-4">
+                  <TabsTrigger value="info">Info</TabsTrigger>
+                  <TabsTrigger value="health">Saúde</TabsTrigger>
                   <TabsTrigger value="history">Histórico</TabsTrigger>
                   <TabsTrigger value="appointments">Consultas</TabsTrigger>
                 </TabsList>
@@ -132,6 +141,37 @@ const PatientFamily = () => {
                     <div><p className="text-muted-foreground text-xs">Género</p><p className="font-medium">{viewMember.gender}</p></div>
                     <div><p className="text-muted-foreground text-xs">Email</p><p className="font-medium">{viewMember.email}</p></div>
                     <div><p className="text-muted-foreground text-xs">Telefone</p><p className="font-medium">{viewMember.phone}</p></div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="health" className="space-y-3 mt-3">
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Droplets className="h-4 w-4 text-destructive" />
+                      <div><p className="text-muted-foreground text-xs">Grupo Sanguíneo</p><p className="font-medium">{viewMember.bloodGroup || "Não informado"}</p></div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground mb-1">Alergias</p>
+                    {viewMember.allergies.length > 0 ? (
+                      <div className="flex flex-wrap gap-1">{viewMember.allergies.map((a, i) => <Badge key={i} variant="destructive" className="text-xs">{a}</Badge>)}</div>
+                    ) : <p className="text-sm text-muted-foreground">Nenhuma alergia registada</p>}
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground mb-1">Condições Crónicas</p>
+                    {viewMember.chronicConditions.length > 0 ? (
+                      <div className="flex flex-wrap gap-1">{viewMember.chronicConditions.map((c, i) => <Badge key={i} variant="secondary" className="text-xs">{c}</Badge>)}</div>
+                    ) : <p className="text-sm text-muted-foreground">Nenhuma condição registada</p>}
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground mb-1">Contacto de Emergência</p>
+                    <div className="flex items-center gap-2 p-2 rounded bg-muted/50 text-sm">
+                      <Phone className="h-4 w-4 text-primary shrink-0" />
+                      <div>
+                        <p className="font-medium">{viewMember.emergencyContact.name}</p>
+                        <p className="text-xs text-muted-foreground">{viewMember.emergencyContact.phone} • {viewMember.emergencyContact.relationship}</p>
+                      </div>
+                    </div>
                   </div>
                 </TabsContent>
 

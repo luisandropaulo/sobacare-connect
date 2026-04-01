@@ -80,8 +80,8 @@ const Login = () => {
               </div>
               <div className="space-y-2">
                 <Label>Perfil</Label>
-                <div className="grid grid-cols-3 gap-2">
-                  {([["patient", "Paciente"], ["hospital", "Hospital"], ["admin-master", "Admin"]] as [UserRole, string][]).map(([value, label]) => (
+                <div className="grid grid-cols-2 gap-2">
+                  {([["patient", "Paciente"], ["hospital", "Hospital"]] as [UserRole, string][]).map(([value, label]) => (
                     <Button key={value} type="button" variant={role === value ? "default" : "outline"} size="sm" className="text-xs" onClick={() => setRole(value)}>
                       {label}
                     </Button>

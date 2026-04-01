@@ -5,7 +5,7 @@ import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { LogOut, User } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 
 export function PatientHeader() {
   const { user, logout } = useAuth();
@@ -31,8 +31,11 @@ export function PatientHeader() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/dashboard/patient/profile")}>
+            <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/dashboard/patient/settings")}>
               <User className="h-4 w-4" />{user?.name}
+            </DropdownMenuItem>
+            <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/dashboard/patient/settings")}>
+              <Settings className="h-4 w-4" />Definições
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2 text-destructive cursor-pointer" onClick={handleLogout}>

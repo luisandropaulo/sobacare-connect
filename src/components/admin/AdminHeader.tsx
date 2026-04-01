@@ -4,7 +4,7 @@ import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { LogOut, Search, User } from "lucide-react";
+import { LogOut, Search, Settings, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 
@@ -38,6 +38,9 @@ export const AdminHeader = () => {
           <DropdownMenuContent align="end">
             <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/admin/master/profile")}>
               <User className="h-4 w-4" />Meu Perfil
+            </DropdownMenuItem>
+            <DropdownMenuItem className="gap-2 cursor-pointer" onClick={() => navigate("/admin/master/settings")}>
+              <Settings className="h-4 w-4" />Definições
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2 text-destructive cursor-pointer" onClick={handleLogout}>
