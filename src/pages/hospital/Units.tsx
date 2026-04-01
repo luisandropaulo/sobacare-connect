@@ -19,7 +19,7 @@ const unitDepartments: Record<string, string[]> = {
 const HospitalUnits = () => {
   const navigate = useNavigate();
   const [viewUnit, setViewUnit] = useState<HospitalUnit | null>(null);
-  const plan = "Professional";
+  const plan: string = "Professional";
   const maxUnits = plan === "Essential" ? 1 : plan === "Professional" ? 5 : 999;
   const canCreate = hospitalUnits.length < maxUnits;
 
