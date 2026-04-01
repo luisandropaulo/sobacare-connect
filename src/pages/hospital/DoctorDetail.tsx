@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { hospitalDoctors, hospitalAppointments } from "@/data/hospitalMockData";
 import { ProfileHeader } from "@/components/shared/ProfileHeader";
 import { InfoCard } from "@/components/shared/InfoCard";
@@ -8,17 +8,25 @@ import { StatusPill } from "@/components/shared/StatusPill";
 import { DataTable } from "@/components/shared/DataTable";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/shared/EmptyState";
-import { Mail, Phone, Stethoscope, Users, Calendar, Edit } from "lucide-react";
+import { Mail, Phone, Stethoscope, Users, Calendar, Edit, FileText } from "lucide-react";
 import { toast } from "sonner";
+
+const doctorBios: Record<string, string> = {
+  hd1: "Cardiologista com mais de 15 anos de experiência em cuidados cardiovasculares, especializado em hipertensão e insuficiência cardíaca.",
+  hd2: "Pediatra dedicada com foco em neonatologia e desenvolvimento infantil. Formada pela Universidade Agostinho Neto.",
+  hd3: "Ortopedista especializado em cirurgia minimamente invasiva e reabilitação desportiva.",
+  hd4: "Dermatologista com experiência em doenças tropicais de pele e dermatologia estética.",
+  hd5: "Neurologista com interesse em epilepsia e doenças neurodegenerativas.",
+};
 
 const HospitalDoctorDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const doctor = hospitalDoctors.find((d) => d.id === id);
 
   if (!doctor) return <EmptyState title="Médico não encontrado" />;
 
   const docAppointments = hospitalAppointments.filter((a) => a.doctor === doctor.name);
+  const bio = doctorBios[doctor.id] || "Biografia não disponível.";
 
   return (
     <div className="space-y-6">
@@ -54,6 +62,9 @@ const HospitalDoctorDetail = () => {
                 <InfoCard title="Contacto" items={[
                   { label: "Email", value: doctor.email, icon: Mail },
                   { label: "Telefone", value: doctor.phone, icon: Phone },
+                ]} />
+                <InfoCard title="Biografia" items={[
+                  { label: "Sobre", value: bio, icon: FileText },
                 ]} />
               </div>
             ),
