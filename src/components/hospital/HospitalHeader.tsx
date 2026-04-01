@@ -5,7 +5,7 @@ import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { LogOut, User } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 
 export function HospitalHeader() {
   const { user, logout } = useAuth();
